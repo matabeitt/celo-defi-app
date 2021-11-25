@@ -292,7 +292,7 @@ const isEthAddress = str => {
 };
 
 const fetchTxWithAlwaysCache = async address => {
-  const url = `https://api.etherscan.io/api?module=account&action=txlist&address=${address}&tag=oldest&page=1&offset=1&apikey=${ETHERSCAN_API_KEY}`;
+  const url = `https://explorer.celo.org/api?module=account&action=txlist&address=${address}&tag=oldest&page=1&offset=1&apikey=${ETHERSCAN_API_KEY}`;
   const cachedTxTime = await AsyncStorage.getItem(`first-tx-${address}`);
   if (cachedTxTime) {
     return cachedTxTime;
@@ -327,7 +327,7 @@ export const daysFromTheFirstTx = address => {
 const hasPreviousTransactions = address => {
   return new Promise(async resolve => {
     try {
-      const url = `https://api.etherscan.io/api?module=account&action=txlist&address=${address}&tag=latest&page=1&offset=1&apikey=${ETHERSCAN_API_KEY}`;
+      const url = `https://explorer.celo.org/api?module=account&action=txlist&address=${address}&tag=latest&page=1&offset=1&apikey=${ETHERSCAN_API_KEY}`;
       const response = await fetch(url);
       const parsedResponse = await response.json();
       // Timeout needed to avoid the 5 requests / second rate limit of etherscan API

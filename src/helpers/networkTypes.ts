@@ -6,7 +6,7 @@ export enum Network {
 export default {
   mainnet: 'mainnet' as Network,
   testnet: 'alfajores' as Network,
-}
+};
 
 export enum Network2 {
   arbitrum = 'arbitrum',

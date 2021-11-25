@@ -55,7 +55,7 @@ export const polygonGasStationGetGasPrices = () =>
  * @type RainbowFetchClient instance
  */
 const etherscanAPI = new RainbowFetchClient({
-  baseURL: 'https://api.etherscan.io',
+  baseURL: 'https://explorer.celo.org',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
