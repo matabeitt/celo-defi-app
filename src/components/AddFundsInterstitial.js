@@ -179,7 +179,8 @@ const AddFundsInterstitial = ({ network }) => {
         console.log('Damaged wallet preventing add cash');
         return;
       }
-      if (ios) {
+      // eslint-disable-next-line no-constant-condition
+      if (ios && false) {
         navigate(Routes.ADD_CASH_FLOW, {
           params: !isNaN(amount) ? { amount } : null,
           screen: Routes.ADD_CASH_SCREEN_NAVIGATOR,
@@ -210,7 +211,7 @@ const AddFundsInterstitial = ({ network }) => {
       {network === networkTypes.mainnet ? (
         <Fragment>
           <Title>
-            To get started, buy some ETH{ios ? ` with Apple Pay` : ''}
+            To get started, buy some CELO{ios ? ` with Apple Pay` : ''}
           </Title>
           <Row justify="space-between" marginVertical={30}>
             <AmountButton
@@ -247,7 +248,7 @@ const AddFundsInterstitial = ({ network }) => {
           </InterstitialButtonRow>
           {!isSmallPhone && <InterstitialDivider />}
           <Subtitle isSmallPhone={isSmallPhone}>
-            or send ETH to your wallet
+            or send CELO to your wallet
           </Subtitle>
 
           <Paragraph>
@@ -257,7 +258,7 @@ const AddFundsInterstitial = ({ network }) => {
       ) : (
         <Fragment>
           <Title>
-            Request test ETH through the {get(networkInfo[network], 'name')}{' '}
+            Request test CELO through the {get(networkInfo[network], 'name')}{' '}
             faucet
           </Title>
           <Row marginTop={30}>
@@ -275,11 +276,11 @@ const AddFundsInterstitial = ({ network }) => {
           </Row>
           {!isSmallPhone && <InterstitialDivider />}
           <Subtitle isSmallPhone={isSmallPhone}>
-            or send test ETH to your wallet
+            or send test CELO to your wallet
           </Subtitle>
 
           <Paragraph>
-            Send test ETH from another {get(networkInfo[network], 'name')}{' '}
+            Send test CELO from another {get(networkInfo[network], 'name')}{' '}
             wallet—or ask a friend!
           </Paragraph>
         </Fragment>
