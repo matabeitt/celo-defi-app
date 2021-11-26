@@ -3,7 +3,7 @@ import networkTypes from './networkTypes';
 const networkInfo = {
   [`${networkTypes.mainnet}`]: {
     balance_checker_contract_address:
-      '0x471EcE3750Da237f93B8E339c536989b8978a438',
+      '0xEd9a214A176831F0BE1764Eeb1FCF30D3dE3A067',
     color: '#0E76FD',
     disabled: false,
     exchange_enabled: true,
