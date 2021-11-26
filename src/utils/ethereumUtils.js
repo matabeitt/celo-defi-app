@@ -122,7 +122,7 @@ const getNativeAssetForNetwork = async (network, address) => {
   return nativeAsset;
 };
 
-const getAsset = (assets, address = 'eth') =>
+const getAsset = (assets, address = 'celo') =>
   find(assets, matchesProperty('address', toLower(address)));
 
 const getAssetPrice = (address = ETH_ADDRESS) => {
