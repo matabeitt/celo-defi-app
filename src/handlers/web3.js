@@ -122,32 +122,33 @@ export const getProviderForNetwork = async (network = NetworkTypes.mainnet) => {
     return new JsonRpcProvider(network, NetworkTypes.mainnet);
   } else {
     let url;
-    switch (network) {
-      case NetworkTypes.mainnet:
-        url = ''; // TODO: Get CELO Mainnet RPC
-        break;
-      case NetworkTypes.testnet:
-        url = ''; // TODO: Get CELO Testnet RPC (Alfajores)
-        break;
-    }
+    
+    // switch (network) {
+    //   case NetworkTypes.mainnet:
+    //     url = ''; // TODO: Get CELO Mainnet RPC
+    //     break;
+    //   case NetworkTypes.testnet:
+    //     url = ''; // TODO: Get CELO Testnet RPC (Alfajores)
+    //     break;
+    // }
 
     logger.sentry(`Chose RPC URL: ${url}`);
     logger.sentry(`Default swapped: ${replace(infuraUrl, 'network', network)}`);
 
     // TODO: Replace below
-    // switch (network) {
-    //   case NetworkTypes.arbitrum:
-    //     url = ARBITRUM_MAINNET_RPC;
-    //     break;
-    //   case NetworkTypes.optimism:
-    //     url = OPTIMISM_MAINNET_RPC;
-    //     break;
-    //   case NetworkTypes.polygon:
-    //     url = POLYGON_MAINNET_RPC;
-    //     break;
-    //   default:
-    //     url = replace(infuraUrl, 'network', network);
-    // }
+    switch (network) {
+      case NetworkTypes.arbitrum:
+        url = ARBITRUM_MAINNET_RPC;
+        break;
+      case NetworkTypes.optimism:
+        url = OPTIMISM_MAINNET_RPC;
+        break;
+      case NetworkTypes.polygon:
+        url = POLYGON_MAINNET_RPC;
+        break;
+      default:
+        url = replace(infuraUrl, 'network', network);
+    }
 
     const provider = new JsonRpcProvider(url);
     networkProviders[network] = provider;
