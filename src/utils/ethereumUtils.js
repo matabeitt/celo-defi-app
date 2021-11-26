@@ -267,7 +267,7 @@ const getChainIdFromNetwork = network => {
  * @param  {String} network
  */
 function getEtherscanHostForNetwork(network) {
-  const base_host = 'etherscan.io';
+  const base_host = 'explorer.celo.org';
   if (network === networkTypes.optimism) {
     return OPTIMISM_BLOCK_EXPLORER_URL;
   } else if (network === networkTypes.polygon) {
