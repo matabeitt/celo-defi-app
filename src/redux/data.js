@@ -241,7 +241,7 @@ const genericAssetsFallback = () => async (dispatch, getState) => {
 
   keys(TokensListenedCache?.[nativeCurrency]).forEach(address => {
     const coingeckoAsset = ids.find(
-      ({ platforms: { ethereum: tokenAddress } }) =>
+      ({ platforms: { celo: tokenAddress } }) =>
         toLower(tokenAddress) === address
     );
 
