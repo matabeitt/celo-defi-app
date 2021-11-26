@@ -95,7 +95,7 @@ const GENERIC_ASSETS_REFRESH_INTERVAL = 60000; // 1 minute
 const GENERIC_ASSETS_FALLBACK_TIMEOUT = 10000; // 10 seconds
 
 export const COINGECKO_IDS_ENDPOINT =
-  'https://api.coingecko.com/api/v3/coins/list?include_platform=true&asset_platform_id=ethereum';
+  'https://api.coingecko.com/api/v3/coins/list?include_platform=true&asset_platform_id=celo';
 
 // -- Constants --------------------------------------- //
 
