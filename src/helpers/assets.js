@@ -36,7 +36,7 @@ const addEthPlaceholder = (
   nativeCurrency,
   emptyCollectibles
 ) => {
-  const hasEth = !!find(assets, asset => asset.address === 'eth');
+  const hasEth = !!find(assets, asset => asset.address === 'celo');
 
   const { genericAssets } = store.getState().data;
   if (
@@ -47,19 +47,19 @@ const addEthPlaceholder = (
     const { relative_change_24h, value } = genericAssets?.eth?.price || {};
 
     const zeroEth = {
-      address: 'eth',
+      address: 'celo',
       balance: {
         amount: '0',
-        display: '0 ETH',
+        display: '0 CELO',
       },
       color: '#29292E',
       decimals: 18,
       icon_url: ETH_ICON_URL,
       isCoin: true,
-      isPinned: pinnedCoins.includes('eth'),
+      isPinned: pinnedCoins.includes('celo'),
       isPlaceholder: true,
       isSmall: false,
-      name: 'Ethereum',
+      name: 'CELO',
       native: {
         balance: {
           amount: '0.00',
@@ -75,9 +75,9 @@ const addEthPlaceholder = (
         },
       },
       price: value,
-      symbol: 'ETH',
+      symbol: 'CELO',
       type: 'token',
-      uniqueId: 'eth',
+      uniqueId: 'celo',
     };
 
     return { addedEth: true, assets: concat([zeroEth], assets) };

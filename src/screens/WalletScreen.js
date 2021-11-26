@@ -81,7 +81,6 @@ export default function WalletScreen() {
 
   const dispatch = useDispatch();
 
-  
   useEffect(() => {
     eth?.price?.value && dispatch(updatePositions());
   }, [dispatch, eth?.price?.value, numberOfPools]);
