@@ -60,8 +60,8 @@ export const UNIV3_NFT_CONTRACT_ADDRESS =
 export const ETH_ICON_URL = 'https://icodrops.com/wp-content/uploads/2018/06/Celo-Logo.jpg';
 export const RAINBOW_PROFILES_BASE_URL = 'https://rainbow.me';
 
-export const ETH_COINGECKO_ID = 'ethereum';
-export const ETH_ADDRESS = 'eth';
+export const ETH_COINGECKO_ID = 'celo';
+export const ETH_ADDRESS = 'celo';
 export const ARBITRUM_ETH_ADDRESS =
   '0x0000000000000000000000000000000000000000';
 export const OPTIMISM_ETH_ADDRESS =
