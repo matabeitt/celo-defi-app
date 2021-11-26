@@ -13,7 +13,8 @@ import { balanceCheckerContractAbi } from '@rainbow-me/references';
 import { fromWei, handleSignificantDecimals } from '@rainbow-me/utilities';
 import logger from 'logger';
 
-const ETH_ADDRESS = '0x0000000000000000000000000000000000000000';
+// const ETH_ADDRESS = '0x0000000000000000000000000000000000000000';
+const ETH_ADDRESS = '0x471EcE3750Da237f93B8E339c536989b8978a438';
 
 const useWalletBalances = wallets => {
   const { network } = useAccountSettings();
