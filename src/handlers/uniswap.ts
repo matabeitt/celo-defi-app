@@ -443,7 +443,7 @@ export const getTokenForCurrency = (
   currency: Asset,
   chainId: ChainId
 ): Token => {
-  if (currency.address === 'eth') return CELO[chainId];
+  if (currency.address === 'celo') return CELO[chainId];
   return new Token(
     chainId,
     currency.address,

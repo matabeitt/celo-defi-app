@@ -24,13 +24,13 @@ const tokenList: RainbowToken[] = map(RAINBOW_TOKEN_LIST_DATA.tokens, token => {
 });
 
 const ethWithAddress: RainbowToken = {
-  address: 'eth',
+  address: 'celo',
   decimals: 18,
   isRainbowCurated: true,
   isVerified: true,
-  name: 'Ethereum',
-  symbol: 'ETH',
-  uniqueId: 'eth',
+  name: 'celo',
+  symbol: 'CELO',
+  uniqueId: 'celo',
 };
 
 const tokenListWithEth: RainbowToken[] = [ethWithAddress, ...tokenList];

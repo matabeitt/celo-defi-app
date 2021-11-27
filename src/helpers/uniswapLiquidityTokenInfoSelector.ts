@@ -70,8 +70,8 @@ const switchWethToEth = (token: Token, chainId: ChainId): Token => {
       ...token,
       address: ETH_ADDRESS,
       decimals: 18,
-      name: 'Ethereum',
-      symbol: 'ETH',
+      name: 'CELO',
+      symbol: 'celo',
     };
   }
   return token;

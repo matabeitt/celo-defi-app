@@ -105,6 +105,11 @@ export const AddCashCurrencyInfo = {
       name: 'Dai',
       symbol: 'DAI',
     },
+    'celo': {
+      decimals: 18,
+      name: 'celo',
+      symbol: 'CELO',
+    },
     'eth': {
       decimals: 18,
       name: 'Ethereum',
@@ -119,8 +124,8 @@ export const AddCashCurrencyInfo = {
     },
     [ETH_ADDRESS]: {
       decimals: 18,
-      name: 'Ethereum',
-      symbol: 'ETH',
+      name: 'celo',
+      symbol: 'CELO',
     },
   },
 };

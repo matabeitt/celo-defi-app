@@ -9,10 +9,10 @@ it('filterListSimpleArray', () => {
 
 it('filterListWithParameter', () => {
   const list = [
-    { name: 'Ethereum', symbol: 'ETH' },
+    { name: 'celo', symbol: 'CELO' },
     { name: '0x Protocol Token', symbol: 'ZRX' },
   ];
-  const searchPhrase = 'eth';
+  const searchPhrase = 'celo';
   const result = filterList(list, searchPhrase, ['name']);
   expect(result.length).toBe(1);
 });

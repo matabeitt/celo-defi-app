@@ -99,8 +99,8 @@ const findAssetsToWatch = async (
         asset_code: ETH_ADDRESS,
         coingecko_id: ETH_COINGECKO_ID,
         decimals: 18,
-        name: 'Ethereum',
-        symbol: 'ETH',
+        name: 'celo',
+        symbol: 'CELO',
       },
     },
   ];

@@ -227,8 +227,8 @@ const genericAssetsFallback = () => async (dispatch, getState) => {
       asset_code: ETH_ADDRESS,
       coingecko_id: ETH_COINGECKO_ID,
       decimals: 18,
-      name: 'Ethereum',
-      symbol: 'ETH',
+      name: 'celo',
+      symbol: 'CELO',
     },
     {
       asset_code: DPI_ADDRESS,
