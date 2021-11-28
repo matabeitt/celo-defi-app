@@ -24,6 +24,7 @@ const ethGasstationApi = new RainbowFetchClient({
  * @desc get ethereum gas prices
  * @return {Promise}
  */
+//https://api.etherscan.io/
 export const ethGasStationGetGasPrices = () =>
   ethGasstationApi.get(`/api/v1/egs/api/ethgasAPI.json`, {
     params: {
@@ -56,7 +57,7 @@ export const polygonGasStationGetGasPrices = () =>
  * @type RainbowFetchClient instance
  */
 const etherscanAPI = new RainbowFetchClient({
-  baseURL: 'https://explorer.celo.org',
+  baseURL: 'https://api.etherscan.io/',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
@@ -161,17 +162,22 @@ export const celoGetGasPrices = () => {
   return new Promise(async resolve => {
     let token = await kit.contracts.getStableToken();
     let gpmContract = await kit.contracts.getGasPriceMinimum();
-    let min = await gpmContract.getGasPriceMinimum(token.address);
+    let min = Math.ceil(
+      (await gpmContract.getGasPriceMinimum(token.address)) / 10e17
+    );
     resolve({
-      message: 'OK',
-      result: {
-        FastGasPrice: min * 2,
-        LastBlock: '',
-        ProposeGasPrice: min * 1.3,
-        SafeGasPrice: min,
-        UsdPrice: '',
+      data: {
+        message: 'OK',
+        result: {
+          FastGasPrice: min * 2,
+          gasUsedRatio: min / (min * 1.3),
+          LastBlock: '0',
+          ProposeGasPrice: min * 1.3,
+          SafeGasPrice: min * 1.3,
+          suggestBaseFee: min,
+        },
+        status: '1',
       },
-      status: '1',
     });
   });
 };

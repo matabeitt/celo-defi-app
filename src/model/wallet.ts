@@ -692,7 +692,7 @@ export const createWallet = async (
       await savePrivateKey(walletAddress, pkey);
     }
     logger.sentry('[createWallet] - saved private key');
-
+;
     const colorIndexForWallet =
       color !== null ? color : addressHashedColorIndex(walletAddress) || 0;
     addresses.push({
@@ -706,8 +706,8 @@ export const createWallet = async (
     });
 
     logger.sentry(`${addresses}`)
-    logger.sentry(`[SELF] addresses :${addresses}`)
-    logger.sentry(`[SELF] type :${type}`)
+    logger.sentry(`[SELF] addresses :${addresses}`);
+    logger.sentry(`[SELF] type :${type}`);
     if (type !== EthereumWalletType.readOnly) {
       // Creating signature for this wallet
       logger.sentry(`[createWallet] - generating signature`);
