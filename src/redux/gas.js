@@ -1,8 +1,8 @@
 import analytics from '@segment/analytics-react-native';
 import { get, isEmpty } from 'lodash';
 import {
-  etherscanGetGasEstimates,
-  etherscanGetGasPrices,
+  celoGasPriceEstimates,
+  celoGetGasPrices,
   ethGasStationGetGasPrices,
   getEstimatedTimeForGasPrice,
   polygonGasStationGetGasPrices,
@@ -165,7 +165,7 @@ export const gasPricesStartPolling = (network = networkTypes.mainnet) => async (
             // Use etherscan as our Gas Price Oracle
             const {
               data: { result: etherscanGasPrices },
-            } = await etherscanGetGasPrices();
+            } = await celoGetGasPrices();
 
             const priceData = {
               average: Number(etherscanGasPrices.ProposeGasPrice),
@@ -173,7 +173,7 @@ export const gasPricesStartPolling = (network = networkTypes.mainnet) => async (
               safeLow: Number(etherscanGasPrices.SafeGasPrice),
             };
             // Add gas estimates
-            adjustedGasPrices = await etherscanGetGasEstimates(priceData);
+            adjustedGasPrices = await celoGasPriceEstimates(priceData);
           } catch (e) {
             console.log(new Error('Etherscan gas estimates failed'));
             logger.sentry('Etherscan gas estimates error:', e);

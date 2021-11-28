@@ -52,6 +52,7 @@
   "dependencies": {
     "@apollo/client": "3.2.4",
     "@bankify/react-native-animate-number": "0.2.1",
+    "@celo/contractkit": "^1.3.3",
     "@ethersproject/abi": "5.0.9",
     "@ethersproject/abstract-provider": "5.0.7",
     "@ethersproject/abstract-signer": "5.0.9",

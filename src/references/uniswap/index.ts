@@ -74,19 +74,28 @@ const PAIR_GET_RESERVES_CALL_DATA: string = PAIR_INTERFACE.encodeFunctionData(
   PAIR_GET_RESERVES_FRAGMENT
 );
 
-// TODO: Replace below
-// const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
-//   [ChainId.MAINNET]: '0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441',
-//   [ChainId.ROPSTEN]: '0x53C43764255c17BD724F74c4eF150724AC50a3ed',
-//   [ChainId.KOVAN]: '0x2cc8688C5f75E365aaEEb4ea8D6a480405A48D2A',
-//   [ChainId.RINKEBY]: '0x42Ad527de7d4e9d9d011aC45B31D8551f8Fe9821',
-//   [ChainId.GÖRLI]: '0x77dCa2C955b15e9dE4dbBCf1246B4B85b651e50e',
-// };
+const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
+  // TODO: Replace the following contracts with
+  // multi-call contracts on the respective networks
+  // that can do simple operations on the blockchain.
+  [ChainId.MAINNET]: '0x75f59534dd892c1f8a7b172d639fa854d529ada3',
+  [ChainId.ALFAJORES]: '0x75f59534dd892c1f8a7b172d639fa854d529ada3',
+  [ChainId.BAKLAVA]: '0x75f59534dd892c1f8a7b172d639fa854d529ada3',
+
+  // [ChainId.Alfajores]: '0x75f59534dd892c1f8a7b172d639fa854d529ada3',
+  // [ChainId.Baklava]: '0x75f59534dd892c1f8a7b172d639fa854d529ada3',
+
+  // [ChainId.MAINNET]: '0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441',
+  // [ChainId.ROPSTEN]: '0x53C43764255c17BD724F74c4eF150724AC50a3ed',
+  // [ChainId.KOVAN]: '0x2cc8688C5f75E365aaEEb4ea8D6a480405A48D2A',
+  // [ChainId.RINKEBY]: '0x42Ad527de7d4e9d9d011aC45B31D8551f8Fe9821',
+  // [ChainId.GÖRLI]: '0x77dCa2C955b15e9dE4dbBCf1246B4B85b651e50e',
+};
 
 export {
   CURATED_UNISWAP_TOKENS,
-  // MULTICALL_ABI,
-  // MULTICALL_NETWORKS,
+  MULTICALL_ABI,
+  MULTICALL_NETWORKS,
   PAIR_GET_RESERVES_CALL_DATA,
   PAIR_GET_RESERVES_FRAGMENT,
   PAIR_INTERFACE,

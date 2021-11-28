@@ -1,3 +1,4 @@
+import { newKit } from '@celo/contractkit';
 import {
   ETH_GAS_STATION_API_KEY,
   ETHERSCAN_API_KEY,
@@ -136,4 +137,51 @@ export const getEstimatedTimeForGasPrice = async gwei => {
     throw new Error('Etherscan gas estimation request failed');
   }
   return Number(response.result) / 60;
+};
+
+export const celoGasStationApi = new RainbowFetchClient({
+  baseURL: 'https://explorer.celo.org',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  timeout: 30000, // 30 secs
+});
+
+/**
+ * @desc get ethereum gas prices from Etherscan
+ * @return {Promise}
+ */
+export const celoGetGasPrices = () => {
+  const kit = newKit('https://forno.celo.org');
+  return new Promise(async resolve => {
+    let token = await kit.contracts.getStableToken();
+    let gpmContract = await kit.contracts.getGasPriceMinimum();
+    let min = await gpmContract.getGasPriceMinimum(token.address);
+    resolve({
+      message: 'OK',
+      result: {
+        FastGasPrice: min * 2,
+        LastBlock: '',
+        ProposeGasPrice: min * 1.3,
+        SafeGasPrice: min,
+        UsdPrice: '',
+      },
+      status: '1',
+    });
+  });
+};
+
+/**
+ * @desc get CELO time estimates
+ * @params {data}
+ * @return {Promise}
+ */
+export const celoGasPriceEstimates = data => {
+  return {
+    ...data,
+    avgWait: 0.5,
+    fastWait: 0.2,
+    safeLowWait: 1,
+  };
 };
