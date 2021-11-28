@@ -80,7 +80,7 @@
     "@react-native-community/clipboard": "git+https://github.com/gnardini/clipboard#01d1c13",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-community/netinfo": "5.9.7",
-    "@react-native-community/viewpager": "5.0.11^",
+    "@react-native-community/viewpager": "^5.0.11",
     "@react-native-firebase/app": "12.1.0",
     "@react-native-firebase/crashlytics": "12.1.0",
     "@react-native-firebase/messaging": "12.1.0",
@@ -424,7 +424,6 @@
   },
   "lavamoat": {
     "allowScripts": {
-      "Rainbow": false,
       "@scarf/scarf": false,
       "@lavamoat/preinstall-always-fail": false,
       "core-js": false,
@@ -435,12 +434,12 @@
       "react-native-storage": false,
       "react-query": false,
       "secp256k1": false,
-      "@sentry/cli": true,
       "web3": false,
       "web3-bzz": false,
       "bufferutil": false,
       "utf-8-validate": false,
-      "web3-shh": false
+      "web3-shh": false,
+      "tiny-secp256k1": false
     }
   }
 }
