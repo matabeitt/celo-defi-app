@@ -139,6 +139,10 @@ export const getEstimatedTimeForGasPrice = async gwei => {
   return Number(response.result) / 60;
 };
 
+/**
+ * @desc get Celo Explorer api
+ * @return {RainbowFetchClient}
+ */
 export const celoGasStationApi = new RainbowFetchClient({
   baseURL: 'https://explorer.celo.org',
   headers: {
@@ -149,7 +153,7 @@ export const celoGasStationApi = new RainbowFetchClient({
 });
 
 /**
- * @desc get ethereum gas prices from Etherscan
+ * @desc get Celo gas prices from Contract Kit
  * @return {Promise}
  */
 export const celoGetGasPrices = () => {
