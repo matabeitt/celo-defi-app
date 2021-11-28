@@ -552,6 +552,7 @@ export const createWallet = async (
     logger.sentry('Generating a new seed phrase');
   }
   const walletSeed = seed || generateMnemonic();
+  console.log('creating wallet from this seed: ->>> ', walletSeed);
   logger.sentry([walletSeed]);
 
   let addresses: RainbowAccount[] = [];
@@ -570,6 +571,7 @@ export const createWallet = async (
       checkedWallet ||
       (await ethereumUtils.deriveAccountFromWalletInput(walletSeed));
     let pkey = walletSeed;
+    console.log('wallet SEED : ', pkey);
     if (!walletResult) return null;
     const walletAddress = address;
     if (isHDWallet) {
@@ -692,7 +694,6 @@ export const createWallet = async (
       await savePrivateKey(walletAddress, pkey);
     }
     logger.sentry('[createWallet] - saved private key');
-;
     const colorIndexForWallet =
       color !== null ? color : addressHashedColorIndex(walletAddress) || 0;
     addresses.push({
