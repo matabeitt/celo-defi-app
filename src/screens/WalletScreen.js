@@ -75,6 +75,7 @@ export default function WalletScreen() {
     shouldRefetchSavings,
   } = useWalletSectionsData();
 
+  // TODO: Figure out wtf this is.
   const eth = useEth();
   const numberOfPools = sections.find(({ pools }) => pools)?.data.length ?? 0;
 

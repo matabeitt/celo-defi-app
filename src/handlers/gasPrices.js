@@ -1,3 +1,4 @@
+import { newKit } from '@celo/contractkit';
 import {
   ETH_GAS_STATION_API_KEY,
   ETHERSCAN_API_KEY,
@@ -23,6 +24,7 @@ const ethGasstationApi = new RainbowFetchClient({
  * @desc get ethereum gas prices
  * @return {Promise}
  */
+//https://api.etherscan.io/
 export const ethGasStationGetGasPrices = () =>
   ethGasstationApi.get(`/api/v1/egs/api/ethgasAPI.json`, {
     params: {
@@ -55,7 +57,7 @@ export const polygonGasStationGetGasPrices = () =>
  * @type RainbowFetchClient instance
  */
 const etherscanAPI = new RainbowFetchClient({
-  baseURL: 'https://api.etherscan.io',
+  baseURL: 'https://api.etherscan.io/',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
@@ -136,4 +138,60 @@ export const getEstimatedTimeForGasPrice = async gwei => {
     throw new Error('Etherscan gas estimation request failed');
   }
   return Number(response.result) / 60;
+};
+
+/**
+ * @desc get Celo Explorer api
+ * @return {RainbowFetchClient}
+ */
+export const celoGasStationApi = new RainbowFetchClient({
+  baseURL: 'https://explorer.celo.org',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  timeout: 30000, // 30 secs
+});
+
+/**
+ * @desc get Celo gas prices from Contract Kit
+ * @return {Promise}
+ */
+export const celoGetGasPrices = () => {
+  const kit = newKit('https://forno.celo.org');
+  return new Promise(async resolve => {
+    let token = await kit.contracts.getStableToken();
+    let gpmContract = await kit.contracts.getGasPriceMinimum();
+    let min = Math.ceil(
+      (await gpmContract.getGasPriceMinimum(token.address)) / 10e17
+    );
+    resolve({
+      data: {
+        message: 'OK',
+        result: {
+          FastGasPrice: min * 2,
+          gasUsedRatio: min / (min * 1.3),
+          LastBlock: '0',
+          ProposeGasPrice: min * 1.3,
+          SafeGasPrice: min * 1.3,
+          suggestBaseFee: min,
+        },
+        status: '1',
+      },
+    });
+  });
+};
+
+/**
+ * @desc get CELO time estimates
+ * @params {data}
+ * @return {Promise}
+ */
+export const celoGasPriceEstimates = data => {
+  return {
+    ...data,
+    avgWait: 0.5,
+    fastWait: 0.2,
+    safeLowWait: 1,
+  };
 };

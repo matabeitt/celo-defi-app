@@ -1,6 +1,7 @@
 export enum AssetType {
   arbitrum = 'arbitrum',
   compound = 'compound',
+  celo = 'celo',
   eth = 'eth',
   nft = 'nft',
   optimism = 'optimism',
@@ -13,6 +14,7 @@ export enum AssetType {
 
 export default {
   arbitrum: 'arbitrum',
+  celo: 'celo',
   compound: 'compound',
   eth: 'eth',
   nft: 'nft',

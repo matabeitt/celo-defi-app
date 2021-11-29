@@ -1,9 +1,8 @@
 import analytics from '@segment/analytics-react-native';
-import { captureException } from '@sentry/react-native';
 import { get, isEmpty } from 'lodash';
 import {
-  etherscanGetGasEstimates,
-  etherscanGetGasPrices,
+  celoGasPriceEstimates,
+  celoGetGasPrices,
   ethGasStationGetGasPrices,
   getEstimatedTimeForGasPrice,
   polygonGasStationGetGasPrices,
@@ -166,7 +165,7 @@ export const gasPricesStartPolling = (network = networkTypes.mainnet) => async (
             // Use etherscan as our Gas Price Oracle
             const {
               data: { result: etherscanGasPrices },
-            } = await etherscanGetGasPrices();
+            } = await celoGetGasPrices();
 
             const priceData = {
               average: Number(etherscanGasPrices.ProposeGasPrice),
@@ -174,9 +173,9 @@ export const gasPricesStartPolling = (network = networkTypes.mainnet) => async (
               safeLow: Number(etherscanGasPrices.SafeGasPrice),
             };
             // Add gas estimates
-            adjustedGasPrices = await etherscanGetGasEstimates(priceData);
+            adjustedGasPrices = await celoGasPriceEstimates(priceData);
           } catch (e) {
-            captureException(new Error('Etherscan gas estimates failed'));
+            console.log(new Error('Etherscan gas estimates failed'));
             logger.sentry('Etherscan gas estimates error:', e);
             logger.sentry('falling back to eth gas station');
             source = GAS_PRICE_SOURCES.ETH_GAS_STATION;
@@ -205,7 +204,7 @@ export const gasPricesStartPolling = (network = networkTypes.mainnet) => async (
         fetchResolve(true);
       } catch (error) {
         const { fallbackGasPrices } = dispatch(getDefaultTxFees());
-        captureException(new Error('all gas estimates failed'));
+        console.log(new Error('all gas estimates failed'));
         logger.sentry('gas estimates error', error);
         dispatch({
           payload: fallbackGasPrices,

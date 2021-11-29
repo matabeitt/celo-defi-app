@@ -100,20 +100,27 @@ export async function createSignature(
 ) {
   logger.log('Creating a signature');
   const publicKeyForTheSigningWallet = await getPublicKeyOfTheSigningWalletAndCreateWalletIfNeeded();
-
+  console.log('got public key');
   const mainWallet = privateKey
     ? new Wallet(privateKey)
     : await loadWallet(address, false);
+  console.log('loaded wallet');
+
   if (mainWallet) {
     const signatureForSigningWallet = await mainWallet.signMessage(
       publicKeyForTheSigningWallet
     );
+    console.log('signing message');
 
     const encryptor = new AesEncryptor();
+    console.log('new aes encryptor ');
+    console.log('rainbow master key: - ', RAINBOW_MASTER_KEY);
+
     const encryptedSignature = (await encryptor.encrypt(
       RAINBOW_MASTER_KEY,
       signatureForSigningWallet
     )) as string;
+    console.log('encrypted signature encrypted');
 
     await saveString(
       `signature_${address}`,

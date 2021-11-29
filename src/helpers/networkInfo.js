@@ -3,12 +3,12 @@ import networkTypes from './networkTypes';
 const networkInfo = {
   [`${networkTypes.mainnet}`]: {
     balance_checker_contract_address:
-      '0x4dcf4562268dd384fe814c00fad239f06c2a0c2b',
+      '0xEd9a214A176831F0BE1764Eeb1FCF30D3dE3A067',
     color: '#0E76FD',
     disabled: false,
     exchange_enabled: true,
     faucet_url: null,
-    name: 'Ethereum',
+    name: 'Celo',
     value: networkTypes.mainnet,
   },
   [`${networkTypes.ropsten}`]: {

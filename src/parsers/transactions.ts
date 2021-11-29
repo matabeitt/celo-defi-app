@@ -217,8 +217,8 @@ const overrideFailedExecution = (txn: ZerionTransaction): ZerionTransaction => {
     asset: {
       asset_code: ETH_ADDRESS,
       decimals: 18,
-      name: 'Ethereum',
-      symbol: 'ETH',
+      name: 'CELO',
+      symbol: 'CELO',
       type: AssetType.eth,
     },
     direction: TransactionDirection.out,
@@ -266,9 +266,9 @@ const overrideSelfWalletConnect = (
     asset: {
       asset_code: ETH_ADDRESS,
       decimals: 18,
-      name: 'Ethereum',
-      symbol: 'ETH',
-      type: AssetType.eth,
+      name: 'celo',
+      symbol: 'CELO',
+      type: AssetType.celo,
     },
     direction: TransactionDirection.out,
     value: 0,
@@ -293,8 +293,8 @@ const parseTransactionWithEmptyChanges = async (
   const updatedAsset = {
     address: ETH_ADDRESS,
     decimals: 18,
-    name: 'ethereum',
-    symbol: 'ETH',
+    name: 'celo',
+    symbol: 'CELO',
   };
   const priceUnit = 0;
   const valueUnit = 0;

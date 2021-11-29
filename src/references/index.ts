@@ -57,11 +57,11 @@ export const ENS_NFT_CONTRACT_ADDRESS =
 export const UNIV3_NFT_CONTRACT_ADDRESS =
   '0xc36442b4a4522e871399cd717abdd847ab11fe88';
 
-export const ETH_ICON_URL = 'https://s3.amazonaws.com/token-icons/eth.png';
+export const ETH_ICON_URL = 'https://icodrops.com/wp-content/uploads/2018/06/Celo-Logo.jpg';
 export const RAINBOW_PROFILES_BASE_URL = 'https://rainbow.me';
 
-export const ETH_COINGECKO_ID = 'ethereum';
-export const ETH_ADDRESS = 'eth';
+export const ETH_COINGECKO_ID = 'celo';
+export const ETH_ADDRESS = 'celo';
 export const ARBITRUM_ETH_ADDRESS =
   '0x0000000000000000000000000000000000000000';
 export const OPTIMISM_ETH_ADDRESS =
@@ -73,8 +73,8 @@ export const MATIC_POLYGON_ADDRESS =
 export const WETH_ADDRESS = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2';
 export const CDAI_CONTRACT = '0x5d3a536e4d6dbd6114cc1ead35777bab948e3643';
 export const SAI_ADDRESS = '0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359';
-export const DAI_ADDRESS = '0x6b175474e89094c44da98b954eedeac495271d0f';
-export const USDC_ADDRESS = '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48';
+export const DAI_ADDRESS = '0xE4fE50cdD716522A56204352f00AA110F731932d'; // Updated to Optics DAI
+export const USDC_ADDRESS = '0x2A3684e9Dc20B857375EA04235F2F7edBe818FA7'; // Updated to Optics USDC
 export const USDT_ADDRESS = '0xdac17f958d2ee523a2206206994597c13d831ec7';
 export const TUSD_ADDRESS = '0x0000000000085d4780b73119b644ae5ecd22b376';
 export const BUSD_ADDRESS = '0x4fabb145d64652a948d72533023f6e7a623c7c53';
@@ -105,6 +105,11 @@ export const AddCashCurrencyInfo = {
       name: 'Dai',
       symbol: 'DAI',
     },
+    'celo': {
+      decimals: 18,
+      name: 'celo',
+      symbol: 'CELO',
+    },
     'eth': {
       decimals: 18,
       name: 'Ethereum',
@@ -119,8 +124,8 @@ export const AddCashCurrencyInfo = {
     },
     [ETH_ADDRESS]: {
       decimals: 18,
-      name: 'Ethereum',
-      symbol: 'ETH',
+      name: 'celo',
+      symbol: 'CELO',
     },
   },
 };

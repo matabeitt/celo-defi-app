@@ -99,8 +99,8 @@ const findAssetsToWatch = async (
         asset_code: ETH_ADDRESS,
         coingecko_id: ETH_COINGECKO_ID,
         decimals: 18,
-        name: 'Ethereum',
-        symbol: 'ETH',
+        name: 'celo',
+        symbol: 'CELO',
       },
     },
   ];
@@ -186,7 +186,7 @@ const getTokenTxDataFromEtherscan = async (
   offset,
   latestTxBlockNumber
 ) => {
-  let url = `https://api.etherscan.io/api?module=account&action=tokentx&address=${address}&page=${page}&offset=${offset}&sort=desc`;
+  let url = `https://explorer.celo.org/api?module=account&action=tokentx&address=${address}&page=${page}&offset=${offset}&sort=desc`;
   if (latestTxBlockNumber) {
     url += `&startBlock=${latestTxBlockNumber}`;
   }

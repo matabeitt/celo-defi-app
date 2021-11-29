@@ -95,7 +95,7 @@ const GENERIC_ASSETS_REFRESH_INTERVAL = 60000; // 1 minute
 const GENERIC_ASSETS_FALLBACK_TIMEOUT = 10000; // 10 seconds
 
 export const COINGECKO_IDS_ENDPOINT =
-  'https://api.coingecko.com/api/v3/coins/list?include_platform=true&asset_platform_id=ethereum';
+  'https://api.coingecko.com/api/v3/coins/list?include_platform=true&asset_platform_id=celo';
 
 // -- Constants --------------------------------------- //
 
@@ -227,8 +227,8 @@ const genericAssetsFallback = () => async (dispatch, getState) => {
       asset_code: ETH_ADDRESS,
       coingecko_id: ETH_COINGECKO_ID,
       decimals: 18,
-      name: 'Ethereum',
-      symbol: 'ETH',
+      name: 'celo',
+      symbol: 'CELO',
     },
     {
       asset_code: DPI_ADDRESS,
@@ -241,7 +241,7 @@ const genericAssetsFallback = () => async (dispatch, getState) => {
 
   keys(TokensListenedCache?.[nativeCurrency]).forEach(address => {
     const coingeckoAsset = ids.find(
-      ({ platforms: { ethereum: tokenAddress } }) =>
+      ({ platforms: { celo: tokenAddress } }) =>
         toLower(tokenAddress) === address
     );
 

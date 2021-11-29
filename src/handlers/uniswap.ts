@@ -2,16 +2,18 @@ import { Provider } from '@ethersproject/abstract-provider';
 import { Signer } from '@ethersproject/abstract-signer';
 import { Contract } from '@ethersproject/contracts';
 import { Wallet } from '@ethersproject/wallet';
-import { captureException } from '@sentry/react-native';
+import {
+  CurrencyAmount
+} from '@uniswap/sdk';
 import {
   ChainId,
-  CurrencyAmount,
+
   Percent,
   Token,
   Trade,
   TradeType,
-  WETH,
-} from '@uniswap/sdk';
+  CELO,
+} from '@ubeswap/sdk';
 import { get, mapKeys, mapValues, toLower } from 'lodash';
 import { uniswapClient } from '../apollo/client';
 import { UNISWAP_ALL_TOKENS } from '../apollo/queries';
@@ -160,7 +162,7 @@ export const estimateSwapGasLimit = async ({
     }
   } catch (error) {
     logger.sentry('error executing estimateSwapGasLimit');
-    captureException(error);
+    console.log(error);
     return {
       gasLimit: ethUnits.basic_swap,
     };
@@ -441,7 +443,7 @@ export const getTokenForCurrency = (
   currency: Asset,
   chainId: ChainId
 ): Token => {
-  if (currency.address === 'eth') return WETH[chainId];
+  if (currency.address === 'celo') return CELO[chainId];
   return new Token(
     chainId,
     currency.address,

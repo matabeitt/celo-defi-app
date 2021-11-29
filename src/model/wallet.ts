@@ -10,7 +10,6 @@ import { Provider } from '@ethersproject/providers';
 import { SigningKey } from '@ethersproject/signing-key';
 import { Transaction } from '@ethersproject/transactions';
 import { Wallet } from '@ethersproject/wallet';
-import { captureException, captureMessage } from '@sentry/react-native';
 import { generateMnemonic } from 'bip39';
 import { signTypedData_v4, signTypedDataLegacy } from 'eth-sig-util';
 import { isValidAddress, toBuffer, toChecksumAddress } from 'ethereumjs-util';
@@ -217,10 +216,13 @@ export const walletInit = async (
 
   if (!walletAddress) {
     const wallet = await createWallet();
+    logger.sentry(`[SELF] wallet: ${wallet}`);
+
     walletAddress = wallet?.address;
     isNew = true;
     await saveAccountEmptyState(true, walletAddress?.toLowerCase(), network);
   }
+  logger.sentry(`[SELF] walletAddress: ${walletAddress}`);
   return { isNew, walletAddress };
 };
 
@@ -264,7 +266,7 @@ export const sendTransaction = async ({
       Alert.alert(lang.t('wallet.transaction.alert.failed_transaction'));
       logger.sentry('Error', error);
       const fakeError = new Error('Failed to send transaction');
-      captureException(fakeError);
+      console.log(fakeError);
       return { error };
     }
   } catch (error) {
@@ -272,7 +274,7 @@ export const sendTransaction = async ({
     logger.sentry(
       'Failed to SEND transaction due to authentication, alerted user'
     );
-    captureException(error);
+    console.log(error);
     return null;
   }
 };
@@ -297,7 +299,7 @@ export const signTransaction = async ({
       Alert.alert(lang.t('wallet.transaction.alert.failed_transaction'));
       logger.sentry('Error', error);
       const fakeError = new Error('Failed to sign transaction');
-      captureException(fakeError);
+      console.log(fakeError);
       return { error };
     }
   } catch (error) {
@@ -305,7 +307,7 @@ export const signTransaction = async ({
     logger.sentry(
       'Failed to SIGN transaction due to authentication, alerted user'
     );
-    captureException(error);
+    console.log(error);
     return null;
   }
 };
@@ -331,13 +333,13 @@ export const signMessage = async (
       Alert.alert(lang.t('wallet.transaction.alert.failed_sign_message'));
       logger.sentry('Error', error);
       const fakeError = new Error('Failed to sign message');
-      captureException(fakeError);
+      console.log(fakeError);
       return { error };
     }
   } catch (error) {
     Alert.alert(lang.t('wallet.transaction.alert.authentication'));
     logger.sentry('Failed to SIGN message due to authentication, alerted user');
-    captureException(error);
+    console.log(error);
     return null;
   }
 };
@@ -366,7 +368,7 @@ export const signPersonalMessage = async (
       Alert.alert(lang.t('wallet.transaction.alert.failed_sign_message'));
       logger.sentry('Error', error);
       const fakeError = new Error('Failed to sign personal message');
-      captureException(fakeError);
+      console.log(fakeError);
       return { error };
     }
   } catch (error) {
@@ -374,7 +376,7 @@ export const signPersonalMessage = async (
     logger.sentry(
       'Failed to SIGN personal message due to authentication, alerted user'
     );
-    captureException(error);
+    console.log(error);
     return null;
   }
 };
@@ -430,7 +432,7 @@ export const signTypedDataMessage = async (
       Alert.alert(lang.t('wallet.transaction.alert.failed_sign_message'));
       logger.sentry('Error', error);
       const fakeError = new Error('Failed to sign typed data');
-      captureException(fakeError);
+      console.log(fakeError);
       return { error };
     }
   } catch (error) {
@@ -438,7 +440,7 @@ export const signTypedDataMessage = async (
     logger.sentry(
       'Failed to SIGN typed data message due to authentication, alerted user'
     );
-    captureException(error);
+    console.log(error);
     return null;
   }
 };
@@ -501,7 +503,7 @@ const loadPrivateKey = async (
     return privateKey;
   } catch (error) {
     logger.sentry('Error in loadPrivateKey');
-    captureException(error);
+    console.log(error);
     return null;
   }
 };
@@ -542,11 +544,17 @@ export const createWallet = async (
   checkedWallet: null | EthereumWalletFromSeed = null
 ): Promise<null | EthereumWallet> => {
   const isImported = !!seed;
+
+  logger.sentry(`[SELF] seed, color, name, overwrite, checkedWallet : ${[seed, color, name, overwrite, checkedWallet]}`);
+
   logger.sentry('Creating wallet, isImported?', isImported);
   if (!seed) {
     logger.sentry('Generating a new seed phrase');
   }
   const walletSeed = seed || generateMnemonic();
+  console.log('creating wallet from this seed: ->>> ', walletSeed);
+  logger.sentry([walletSeed]);
+
   let addresses: RainbowAccount[] = [];
   try {
     const { dispatch } = store;
@@ -563,6 +571,7 @@ export const createWallet = async (
       checkedWallet ||
       (await ethereumUtils.deriveAccountFromWalletInput(walletSeed));
     let pkey = walletSeed;
+    console.log('wallet SEED : ', pkey);
     if (!walletResult) return null;
     const walletAddress = address;
     if (isHDWallet) {
@@ -571,6 +580,8 @@ export const createWallet = async (
       );
     }
     logger.sentry('[createWallet] - getWallet from seed');
+
+    logger.sentry(``);
 
     // Get all wallets
     const allWalletsResult = await getAllWallets();
@@ -683,7 +694,6 @@ export const createWallet = async (
       await savePrivateKey(walletAddress, pkey);
     }
     logger.sentry('[createWallet] - saved private key');
-
     const colorIndexForWallet =
       color !== null ? color : addressHashedColorIndex(walletAddress) || 0;
     addresses.push({
@@ -695,6 +705,10 @@ export const createWallet = async (
       label: name || '',
       visible: true,
     });
+
+    logger.sentry(`${addresses}`)
+    logger.sentry(`[SELF] addresses :${addresses}`);
+    logger.sentry(`[SELF] type :${type}`);
     if (type !== EthereumWalletType.readOnly) {
       // Creating signature for this wallet
       logger.sentry(`[createWallet] - generating signature`);
@@ -730,7 +744,7 @@ export const createWallet = async (
           );
         } catch (error) {
           logger.sentry('[createWallet] - Error getting txn history');
-          captureException(error);
+          console.log(error);
         }
 
         let discoveredAccount: RainbowAccount | undefined;
@@ -878,7 +892,7 @@ export const createWallet = async (
     return null;
   } catch (error) {
     logger.sentry('Error in createWallet');
-    captureException(error);
+    console.log(error);
     return null;
   }
 };
@@ -919,7 +933,7 @@ export const getPrivateKey = async (
     return pkey || null;
   } catch (error) {
     logger.sentry('Error in getPrivateKey');
-    captureException(error);
+    console.log(error);
     return null;
   }
 };
@@ -959,7 +973,7 @@ export const getSeedPhrase = async (
     return seedPhraseData || null;
   } catch (error) {
     logger.sentry('Error in getSeedPhrase');
-    captureException(error);
+    console.log(error);
     return null;
   }
 };
@@ -988,7 +1002,7 @@ export const getSelectedWallet = async (): Promise<null | RainbowSelectedWalletD
     return null;
   } catch (error) {
     logger.sentry('Error in getSelectedWallet');
-    captureException(error);
+    console.log(error);
     return null;
   }
 };
@@ -1011,7 +1025,7 @@ export const getAllWallets = async (): Promise<null | AllRainbowWalletsData> => 
     return null;
   } catch (error) {
     logger.sentry('Error in getAllWallets');
-    captureException(error);
+    console.log(error);
     return null;
   }
 };
@@ -1099,7 +1113,7 @@ export const generateAccount = async (
     return newAccount;
   } catch (error) {
     logger.sentry('Error generating account for keychain', id);
-    captureException(error);
+    console.log(error);
     return null;
   }
 };
@@ -1202,7 +1216,7 @@ const migrateSecrets = async (): Promise<MigratedSecretsResult | null> => {
     };
   } catch (e) {
     logger.sentry('Error while migrating secrets');
-    captureException(e);
+    console.log(e);
     return null;
   }
 };
@@ -1256,7 +1270,7 @@ export const loadSeedPhraseAndMigrateIfNeeded = async (
         seedPhrase = get(migratedSecrets, 'seedphrase', null);
       } else {
         logger.sentry('Migrated flag was set but there is no key!', id);
-        captureMessage('Missing seed for wallet');
+        console.log('Missing seed for wallet');
       }
     } else {
       logger.sentry('Getting seed directly');
@@ -1284,7 +1298,7 @@ export const loadSeedPhraseAndMigrateIfNeeded = async (
       if (seedPhrase) {
         logger.sentry('got seed succesfully');
       } else {
-        captureMessage(
+        console.log(
           'Missing seed for wallet - (Key exists but value isnt valid)!'
         );
       }
@@ -1293,7 +1307,7 @@ export const loadSeedPhraseAndMigrateIfNeeded = async (
     return seedPhrase;
   } catch (error) {
     logger.sentry('Error in loadSeedPhraseAndMigrateIfNeeded');
-    captureException(error);
+    console.log(error);
     return null;
   }
 };

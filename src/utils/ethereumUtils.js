@@ -1,6 +1,5 @@
 import { Wallet } from '@ethersproject/wallet';
 import AsyncStorage from '@react-native-community/async-storage';
-import { captureException } from '@sentry/react-native';
 import { mnemonicToSeed } from 'bip39';
 import { parse } from 'eth-url-parser';
 import {
@@ -123,7 +122,7 @@ const getNativeAssetForNetwork = async (network, address) => {
   return nativeAsset;
 };
 
-const getAsset = (assets, address = 'eth') =>
+const getAsset = (assets, address = 'celo') =>
   find(assets, matchesProperty('address', toLower(address)));
 
 const getAssetPrice = (address = ETH_ADDRESS) => {
@@ -268,7 +267,7 @@ const getChainIdFromNetwork = network => {
  * @param  {String} network
  */
 function getEtherscanHostForNetwork(network) {
-  const base_host = 'etherscan.io';
+  const base_host = 'explorer.celo.org';
   if (network === networkTypes.optimism) {
     return OPTIMISM_BLOCK_EXPLORER_URL;
   } else if (network === networkTypes.polygon) {
@@ -293,7 +292,7 @@ const isEthAddress = str => {
 };
 
 const fetchTxWithAlwaysCache = async address => {
-  const url = `https://api.etherscan.io/api?module=account&action=txlist&address=${address}&tag=oldest&page=1&offset=1&apikey=${ETHERSCAN_API_KEY}`;
+  const url = `https://explorer.celo.org/api?module=account&action=txlist&address=${address}&tag=oldest&page=1&offset=1`;
   const cachedTxTime = await AsyncStorage.getItem(`first-tx-${address}`);
   if (cachedTxTime) {
     return cachedTxTime;
@@ -328,7 +327,7 @@ export const daysFromTheFirstTx = address => {
 const hasPreviousTransactions = address => {
   return new Promise(async resolve => {
     try {
-      const url = `https://api.etherscan.io/api?module=account&action=txlist&address=${address}&tag=latest&page=1&offset=1&apikey=${ETHERSCAN_API_KEY}`;
+      const url = `https://explorer.celo.org/api?module=account&action=txlist&address=${address}&tag=latest&page=1&offset=1`;
       const response = await fetch(url);
       const parsedResponse = await response.json();
       // Timeout needed to avoid the 5 requests / second rate limit of etherscan API
@@ -356,7 +355,7 @@ const checkIfUrlIsAScam = async url => {
     return false;
   } catch (e) {
     logger.sentry('Error fetching cryptoscamdb.org list');
-    captureException(e);
+    console.log(e);
   }
 };
 

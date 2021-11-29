@@ -1,11 +1,19 @@
 [
   {
+    "name": "Celo Network",
+    "short_name": "celo",
+    "chain": "CELO",
+    "network": "mainnet",
+    "chain_id": 42220,
+    "network_id": 42220
+  },
+  {
     "name": "Ethereum Mainnet",
     "short_name": "eth",
     "chain": "ETH",
     "network": "mainnet",
-    "chain_id": 1,
-    "network_id": 1
+    "chain_id": 42220,
+    "network_id": 42220
   },
   {
     "name": "Ethereum Ropsten",

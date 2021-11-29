@@ -1,139 +1,62 @@
-![](https://pbs.twimg.com/profile_banners/1103191459409420288/1573207178/1500x500)
+# arco iris
+This project was built for the Celo De-Fi For the People 2021 Hackathon.
 
-### 🌈️ Rainbow
+This project is a fork of [rainbow-me/rainbow](https://github.com/rainbow-me/rainbow). The key differences are:
+* Integrates with CELO Mainnet as the native blockchain network.
+* Leverages Ubeswap as the primary de-fi swap platform
 
-> the Ethereum wallet that lives in your pocket!
+---
 
-📲️ [Available on the iOS App Store.](https://apps.apple.com/us/app/rainbow-ethereum-wallet/id1457119021)
-
-🐦️ [Follow us on Twitter](https://twitter.com/rainbowdotme)
-
-## Setup
-
-### General
-
-- Install NVM or Node.js 14: https://github.com/creationix/nvm
-- Install all project dependencies with `yarn setup`
-
-### MacOS
-
-1. Install the [latest version of XCode](https://developer.apple.com/xcode/).
-
-2. Install Watchman:
-
-   ```shell
-   brew install watchman
-   ```
-
-3. Install CocoaPods:
-
-   ```shell
-   sudo gem install cocoapods
-   ```
-
-4. Install the required bundles and Pods for this project:
-   ```shell
-   yarn install-bundle && yarn install-pods
-   ```
+## Installation
 
 ### Linux
 
-1. Install system dependencies:
+#### Android
 
-   ```shell
-   sudo apt install libsecret-tools watchman
-   ```
+The dependencies are: `Android SDK, Node v14, Yarn`
 
-2. Follow the [React Native environment setup
-   instructions](https://reactnative.dev/docs/environment-setup) carefully,
-   which will involve installing Android Studio, the Android SDK, the emulator,
-   etc. and making them available in your `$PATH`.
+> Before attempting to develop and build a React Native application targetted for Android SDK, you must install Android Studio and Android Studio Platform Tools.
 
-3. Ensure at least one [AVD
-   image](https://developer.android.com/studio/run/managing-avds) is available
-   for the emulator (unless using a physical device).
+```sh
+# Install system dependencies
+sudo apt install libsecret-tools watchman
+```
 
-## Developing
+```sh
+git clone ... <dir name>
+```
 
-If you are new to React Native, this is a helpful introduction:
-https://reactnative.dev/docs/getting-started
+```sh
+# Project requires Node v14
+nvm install 14 && nvm use 14
+# Project requires Yarn
+npm install -g yarn
+# Install project dependencies
+yarn setup
+```
 
-### Preflight
+#### iOS
 
-1. Run `nvm use 14` to force Node.js v14.
-
-2. Set up your .env file, use our env.example as a guide.
-
-   **_Note that some features are currently not accessible, we are working with our Data Providers in order to provide open source API Keys!_**
-
-   Here are some resources to generate your own API keys:
-
-   - Etherscan: https://etherscan.io/apis
-   - Infura: https://infura.io/
-   - ETH Gas Station: https://docs.ethgasstation.info/
-   - Imgix: https://www.imgix.com/
-
-3. Ensure a `google-services.json` has been added to the relevant project
-   directory/directories so the compile will not fail.
-
-   This can either be the live Google Services config (for internal development)
-   or a self-provided config for a personal Firebase project (third-party
-   contributors) registered under the package name `me.rainbow`.
+Instructions pending.
 
 ### MacOS
 
-_Note: Darwin versions of the application can only be developed/built on Darwin
-platforms with XCode._
+This section will run through the installation of project dependencies and setup for an Intel system. 
 
-1. Start a React Native webserver with:
+> For information on setting up using Apple Silicon, please reach out to the development team.
 
-   ```shell
-   yarn start
-   ```
+#### Android
 
-2. Open `rainbow-wallet/ios/Rainbow.xcworkspace` in XCode.
+Instructions pending.
 
-3. Run the project by clicking the play button.
+#### iOS
 
-### Linux
+Instructions pending.
 
-_Note: Linux development environments cannot develop or build Darwin versions of the
-project._
+---
 
-1. Start a React Native webserver with:
+## Deployment
 
-   ```shell
-   yarn start
-   ```
+Instructions pending
 
-2. Build/install/start the debug version of the app in an emulator with:
-   ```shell
-   yarn android
-   ```
-
-## CodePush
-
-In order to use code push you must be logged into the correct Microsoft App Center account.
-
-### Prerequisites
-
-```
-npm install -g code-push
-code-push login
-```
-
-At this point you will be required to log into the account tied to the code push public keys in Info.plist
-
-### Deployment
-
-```
-code-push release-react RainbowWallet-iOS ios -d <DEPLOYMENT>
-```
-
-The deployment can either be `Staging` or `Production` depending on the mode of the application you wish to update was built in through XCode.
-
-### Local Builds
-
-In order to build the application in "release" mode but not use the code push distribution you must build the application using the scheme `LocalRelease`.
-
-Building the application with the `Staging` scheme or `Release` scheme will result in your bundle being replaced by the live code push deployment on resume of the application.
+---
