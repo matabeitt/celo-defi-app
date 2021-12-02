@@ -1,4 +1,7 @@
-# Arco Iris
+# arco iris
+
+[Devpost Link](https://devpost.com/software/cryptic-exchange)
+
 This project was built for the Celo De-Fi For the People 2021 Hackathon.
 https://devpost.com/software/cryptic-exchange/edit
 
